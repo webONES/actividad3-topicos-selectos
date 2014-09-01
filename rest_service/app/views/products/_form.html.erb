@@ -1,0 +1,34 @@
+<%= form_for(@product, remote: true, id: 'new_product_group_form') do |f| %>
+<div class="modal-body" id="modal-container">
+    <% if @product.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+        <ul>
+        <% @product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :price %><br>
+      <%= f.text_field :price %>
+    </div>
+</div>
+  <div class="modal-footer">
+    <button id="closeBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+    <%= f.submit 'save', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+<script type="text/javascript">
+$('#new_product_group_form').submit(function() {
+                    $(this).unbind('submit').submit();
+       });
+</script>
